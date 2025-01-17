@@ -14,6 +14,8 @@
 #include "../include/ascii.h"
 #include "../include/math.h"
 #include "../drivers/fs.h"
+#include "../drivers/ata.h"
+#include "test.h"
 #include "../include/stdio.h" // :: There is no standard yet, either switch to "stdio.h" or comment it out until
 //                               :: there is implementation for it
 char* commands[] = {
@@ -34,20 +36,23 @@ void display() {
         vga_print_string("\n");
     }
 }
-
-void fat_test(){
-    FAT fat;
-    fat.FAT_TABLE[0] = 0;
-    fat.blocks[0].next = 1;
-    for (int i = 0; i < 12; i++) {
-        fat.blocks[0].block[i] = 'A';
+uint8_t buf[512];
+void ata_test_write(){
+    uint8_t a[] = {104, 101, 108, 108, 111};
+    for (int i = 0; i < 512; i++) {
+        if (i < 4){
+            buf[i] = a[i];
+        }
+        else{
+            buf[i] = 55; // Example data
+        }
     }
-    fat.FAT_TABLE[1] = 1;
-    fat.blocks[1].next = -1;
-    for (int i = 0; i < 12; i++) {
-        fat.blocks[1].block[i] = 'B';
-    }
-    read_fat(&fat, 0);
+    uint32_t lba = 100;
+    ata_write(lba, buf);
+}
+void ata_test_read(){
+    uint32_t lba = 100;
+    ata_read(lba, buf);
 }
 
 
@@ -56,12 +61,14 @@ void launch_kernel(void) {
     vga_print_string("Welcome to RawBerry OS!\n");
     vga_print_string("[YANE TERMINAL 1.0.0]\n");
     memory_entry memory_table[15] = {};
+    
+    ata_test_write();
+    ata_test_read();
 
     const int32_t start_address = 0x400000; // keep it as const
     int32_t last_address = 0x400000 + Strlen("Hello, RawBerryOS!");
     int32_t last = 1;
     // to use end_adress do: start_address + Strlen(string)
-
     char* Keyboard_buffer;
     while (1) {
         vga_print_string(": ");
@@ -106,7 +113,9 @@ void launch_kernel(void) {
             vga_print_string("memory deleted\n");
         } else if (strEql(strSlice(Keyboard_buffer, 0, 3), "fat") == 0){
             fat_test();
-        }
+        } else if(strEql(strSlice(Keyboard_buffer, 0, 3), "get") == 0){
+            get_data();
+        } 
     }
     return;
 }
