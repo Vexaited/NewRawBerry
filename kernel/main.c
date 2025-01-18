@@ -38,13 +38,13 @@ void display() {
 }
 uint8_t buf[512];
 void ata_test_write(){
-    uint8_t a[] = {104, 101, 108, 108, 111};
+    uint8_t a[] = {104, 101, 108, 108, 111, 111};
     for (int i = 0; i < 512; i++) {
-        if (i < 4){
+        if (i < 5){
             buf[i] = a[i];
         }
         else{
-            buf[i] = 55; // Example data
+            buf[i] = 0;
         }
     }
     uint32_t lba = 100;
