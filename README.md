@@ -1,18 +1,19 @@
 # RawBerry
+RawBerry is a lightweight and simple operating system by [The RawBerry Team](https://github.com/rawberryteam).
 
-A simple and lightweight operation system from RawBerry team.
-
-## Official Discord Server
-
-Join for support and chit chatting - https://discord.gg/umgMqTaY44
+> [!NOTE]
+> This project is trying to be revived. Join our offical Discord server for support and chat: https://discord.gg/umgMqTaY44
 
 ## Features
-
 Actually nothing... We are working hard to create useful features for this OS.
 
-## Languages
 
-C, C++, Assembly
+
+## Languages
+- C
+- Assembly 
+- Rust 
+- C++
 
 ## Authors
 
@@ -20,11 +21,11 @@ We use our [GitHub organization](https://github.com/RawBerryTeam) to host RawBer
 
 - [Gorciu](https://github.com/gorciu-official)
 - [Jakyb](https://github.com/Goldjakyt)
-- [blackneeed](https://github.com/blackneeed)
 - [Eklerka25](https://github.com/Eklerka25)
+- [firelabs-io](https://github.com/firelabs-io)
  
 The order is not important.
 
 ## License
+The MIT License.
 
-MIT

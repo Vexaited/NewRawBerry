@@ -1,18 +1,19 @@
 /* 
  * ---------------------------------------------------------------
  *                            RawBerry
- * (c) RawBerry Team
+ * (c) RawBerry Team 
  * Published on license MIT. Read `/LICENSE` for more details.
  * ---------------------------------------------------------------
 */
 
 #include <declarations.h>
+#include "../drivers/vga.h"
 
-/**
- * Main function. Here kernel will start its work.
- */
-void main() {
-    // After doing this, we can launch final kernel
+void _start() {
+    vga_initialize();
+    vga_color = 11;
+    vga_print_string("[ Booting kernel ]\n");
+    vga_color = 15;
     launch_kernel();
     return;
 }

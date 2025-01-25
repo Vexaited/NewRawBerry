@@ -1,9 +1,14 @@
-OUTPUT_FORMAT("elf64-x86-64")
-ENTRY(main)
+OUTPUT_FORMAT("elf32-i386")
+ENTRY(_start)
 
 SECTIONS
 {
     . = 0x400000;
+
+    .multiboot :
+    {
+        KEEP(*(.multiboot))
+    }
     
     .text : {
         *(.text)
